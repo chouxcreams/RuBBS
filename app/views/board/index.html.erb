@@ -14,7 +14,7 @@
     }
   </style>
   <title>RuBBS</title>
-</head>
+</head>　
 <body>
   <div class="container">
     <div class="row mb-10">
@@ -40,6 +40,18 @@
             <li><%= board.title %></li>
           <% end %>
         </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6 col-xs-12 offset-md-3">
+        <%= form_tag('/', class: "form-inline") do %>
+          <div class="form-group">
+            <div class="col-12">
+              <input type="text" name="title" class="form-control" placeholder="タイトル"></i>
+              <button type="submit" class="btn btn-outline-primary">掲示板を作成</button>
+            </div>
+          </div>
+        <% end %>
       </div>
     </div>
   </div>

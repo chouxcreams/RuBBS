@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  get '/', to: 'board#index'
+  get '/', to: 'board#index', as: :index
+  post '/', to: 'board#create'
 
   get '/test', to: 'application#test'
   get '/visualize', to: 'application#visualize'
