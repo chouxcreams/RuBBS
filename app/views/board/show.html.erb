@@ -17,7 +17,7 @@
             <p class="card-text"><%= simple_format(comment.body)  %></p>
             <%= form_tag(comment_destroy_path(comment.id), method: :delete, class: "form-inline") do %>
               <div class="form-group-inline">
-                <button type="submit" class="btn btn-outline-danger btn-sm">削除</button>
+                <button type="submit" class="text-danger btn-border" style="display: inline-block"><i class="fas fa-trash-alt"></i></button>
                 <input type="hidden" name="board_id" value="<%= @board.id %>">
               </div>
             <% end %>

@@ -20,6 +20,7 @@ class BoardController < ApplicationController
     end
     if params[:body] != ""
       Comment.create(:body => params[:body], :board_id => params[:id], :name => name)
+      Board.increment_counter(:comments_count, params[:id], touch:true)
     end
     redirect_to show_path(params[:id])
   end
