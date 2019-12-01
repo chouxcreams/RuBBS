@@ -7,7 +7,9 @@ class BoardController < ApplicationController
     @comments = Comment.where(board_id: params[:id])
   end
   def create
-    Board.create(:title => params[:title])
+    if params[:title] != ""
+      Board.create(:title => params[:title])
+    end
     redirect_to index_path
   end
   def comment
@@ -16,7 +18,9 @@ class BoardController < ApplicationController
     else
       name = params[:name]
     end
-    Comment.create(:body => params[:body], :board_id => params[:id], :name => name)
+    if params[:body] != ""
+      Comment.create(:body => params[:body], :board_id => params[:id], :name => name)
+    end
     redirect_to show_path(params[:id])
   end
   def destroy
