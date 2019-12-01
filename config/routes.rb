@@ -2,6 +2,10 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   get '/', to: 'board#index', as: :index
   post '/', to: 'board#create'
+  get '/:id', to: 'board#show', as: :show
+  delete '/:id', to: 'board#destroy', as: :destroy
+  put '/:id', to: 'board#comment', as: :comment
+  delete '/comment/:id', to: 'comment#destroy', as: :comment_destroy
 
   get '/test', to: 'application#test'
   get '/visualize', to: 'application#visualize'

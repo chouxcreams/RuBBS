@@ -1,60 +1,44 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-  <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
-  <style>
-    body {
-      background: #f3f3f3;
-    }
-  </style>
-  <title>RuBBS</title>
-</head>
-<body>
+<nav class="navbar navbar-expand-sm navbar-dark bg-primary mt-3 mb-3">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav4" aria-controls="navbarNav4" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="navbar-brand" href="/">RuBBS</a>
+</nav>
 <div class="container">
-  <div class="row mb-10">
-    <div class="col-md-6 col-xs-12 offset-md-3">
-      <nav class="navbar navbar-expand-sm navbar-dark bg-dark mb-3">
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav4" aria-controls="navbarNav4" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse justify-content-around">
-          <ul class="navbar-nav">
-            <li class="nav-item active">
-              <a class="nav-link" href="/">RuBBS</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </div>
-  </div>
-  <%= @board.title %>
-  <div class="row mb-10">
-    <div class="col-md-6 col-xs-12 offset-md-3">
-      <ul>
-        <% @comments.each do |comment| %>
-          <li><%= comment.body %></li>
-        <% end %>
-      </ul>
-    </div>
-  </div>
   <div class="row">
-    <div class="col-md-6 col-xs-12 offset-md-3">
-      <form method="post" enctype="multipart/form-data" class="form-inline">
-        <div class="form-group">
-          <div class="col-12">
-            <input type="text" name="title" class="form-control" placeholder="タイトル"></i>
-            <button type="submit" class="btn btn-outline-primary">投稿</button>
+    <h2 class="col-md-8 col-xs-12 offset-md-2"><%= @board.title %></h2>
+  </div>
+  <% @comments.each_with_index do |comment, index| %>
+    <div class="row mt-2">
+      <div class="col-md-6 col-xs-12 offset-md-3">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title"><%= index+1 %>. <%=comment.name %></h5>
+            <p class="card-text"><%= simple_format(comment.body)  %></p>
+            <%= form_tag(comment_destroy_path(comment.id), method: :delete, class: "form-inline") do %>
+              <div class="form-group-inline">
+                <button type="submit" class="btn btn-outline-danger btn-sm">削除</button>
+                <input type="hidden" name="board_id" value="<%= @board.id %>">
+              </div>
+            <% end %>
           </div>
         </div>
-      </form>
+      </div>
+  </div>
+  <div class="row mt-5">
+    <h4 class="col-md-8 col-xs-12 offset-md-3">投稿する</h4>
+  </div>
+  <% end %>
+  <div class="row">
+    <div class="col-md-6 col-xs-12 offset-md-3">
+      <%= form_tag(show_path, method: :put) do %>
+        <div class="form-group">
+          <input type="text" class="form-control mb-1" name="name" placeholder="名前">
+          <textarea name="body" class="form-control" placeholder="投稿内容"></textarea>
+          <button type="submit" class="btn btn-primary mt-2">投稿</button>
+          <input type="hidden" name="board_id" value="<%= @board.id %>">
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
-</body>
-</html>
