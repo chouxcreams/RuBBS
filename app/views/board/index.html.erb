@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-sm navbar-dark bg-primary mt-3 mb-3">
+<nav class="navbar navbar-expand-sm navbar-dark bg-primary mb-3">
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav4" aria-controls="navbarNav4" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -16,8 +16,8 @@
             <a href=<%=show_path(board.id) %>>
               <%= board.title %>
             </a>
-            <%= form_tag(destroy_path(board.id), method: :delete, class: "form-inline") do %>
-              <div class="form-group" style="display: inline">
+            <%= form_tag(destroy_path(board.id), method: :delete, class: "form-inline", form: "display: inline") do %>
+              <div class="form-group">
                 <button type="submit" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash-alt"></i></button>
               </div>
             <% end %>
