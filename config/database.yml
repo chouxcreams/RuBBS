@@ -83,6 +83,7 @@ test:
 #
 production:
   <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
   database: rubbs_production
   username: rubbs
   password: <%= ENV['RUBBS_DATABASE_PASSWORD'] %>
