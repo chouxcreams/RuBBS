@@ -22,9 +22,11 @@
       </div>
     </div>
   </div>
+  <% if @replies.length != 0 %>
   <div class="row mt-5">
     <h4 class="col-md-8 col-xs-12 offset-md-3"><%= @comment.name %>への返信</h4>
   </div>
+  <% end %>
   <% @replies.each do |reply| %>
     <div class="row mt-2">
       <div class="col-md-6 col-xs-12 offset-md-3">

@@ -2,6 +2,11 @@
   <div class="row">
     <h2 class="col-md-8 col-xs-12 offset-md-2"><%= @board.title %></h2>
   </div>
+  <% if @comments.length == 0 %>
+  <div class="row">
+    <h5 class="col-md-6 col-xs-12 offset-md-3 text-secondary mt-5" style="text-align:center;">まだ投稿がありません</h5>
+  </div>
+  <% end %>
   <% @comments.each_with_index do |comment, index| %>
     <div class="row mt-2">
       <div class="col-md-6 col-xs-12 offset-md-3">
@@ -12,7 +17,7 @@
               <% if comment.reply_to != "0" && comment.reply_to != nil%>
                 >> <%= @indices_on_board[comment.reply_to] %>
               <% end %>
-              <%= simple_format(comment.body)  %>
+              <%= simple_format(h(comment.body))  %>
             </p>
             <%= form_tag(comment_show_path(comment.id), method: :get, class: "form-inline mr-2", style: "display: inline") do %>
               <div class="form-group" style="display: inline">
@@ -46,7 +51,7 @@
   </div>
   <div class="row">
     <div class="col-md-6 col-xs-12 offset-md-3 mt-1 mb-5">
-      <a href=<%= show_path(@comment.board_id) %>>スレッド一覧に戻る</a>
+      <a href=<%= index_path %>>スレッド一覧に戻る</a>
     </div>
   </div>
 </div>
