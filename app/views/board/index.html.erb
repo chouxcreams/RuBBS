@@ -8,12 +8,14 @@
         <% @boards.each do |board| %>
           <div class="list-group-item" style="display: inline">
             <a class="text-primary" href=<%=show_path(board.id) %>><%= board.title %></a>
-            <%= form_tag(destroy_path(board.id), method: :delete, class: "form-inline", form: "display: inline") do %>
-              <span class="mr-4" style="color: #BBBBBB"><i class="fas fa-comment mr-1"></i><%= board.comments_count %></span>
-              <div class="form-group">
-                <button type="submit" class="text-danger"><i class="fas fa-trash-alt"></i></button>
-              </div>
-            <% end %>
+            <div>
+              <span class="mr-3" style="color: #BBBBBB"><i class="fas fa-comment mr-1"></i><%= board.comments_count %></span>
+              <%= form_tag(destroy_path(board.id), method: :delete, class: "form-inline", style: "display: inline") do %>
+                <div class="form-group" style="display: inline">
+                  <button type="submit" class="text-danger"><i class="fas fa-trash-alt"></i></button>
+                </div>
+              <% end %>
+            </div>
           </div>
         <% end %>
       </ul>

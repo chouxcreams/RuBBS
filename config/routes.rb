@@ -5,7 +5,10 @@ Rails.application.routes.draw do
   get '/:id', to: 'board#show', as: :show
   delete '/:id', to: 'board#destroy', as: :destroy
   put '/:id', to: 'board#comment', as: :comment
+
+  get 'comment/:id', to: 'comment#show', as: :comment_show
   delete '/comment/:id', to: 'comment#destroy', as: :comment_destroy
+  put 'comment/:id', to: 'comment#reply', as: :comment_reply
 
   get '/test', to: 'application#test'
   get '/visualize', to: 'application#visualize'
