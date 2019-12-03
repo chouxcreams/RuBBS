@@ -61,8 +61,8 @@
     <div class="col-md-6 col-xs-12 offset-md-3">
       <%= form_tag(comment_reply_path, method: :put, name: "myform") do %>
         <div class="form-group">
-          <input type="text" class="form-control mb-1" name="name" placeholder="名前">
-          <textarea id="body" name="body" class="form-control" placeholder="投稿内容"></textarea>
+          <input type="text" class="form-control mb-1" name="name" maxlength="30" placeholder="名前">
+          <textarea id="body" name="body" class="form-control" maxlength="1000" placeholder="投稿内容"></textarea>
           <button id="my-button" class="btn btn-primary mt-2">返信</button>
           <input type="hidden" name="board_id" value="<%= @board.id %>">
         </div>

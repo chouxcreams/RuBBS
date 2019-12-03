@@ -38,7 +38,7 @@
     <div class="col-md-6 col-xs-12 offset-md-3">
       <%= form_tag('/', class: "form-inline", name: "myform", id: "myform") do %>
         <div class="form-group">
-          <input type="text" name="title" class="form-control" id="title" placeholder="タイトル">
+          <input type="text" name="title" class="form-control" id="title" maxlength="30" placeholder="タイトル">
           <button class="btn btn-outline-primary" id="my-button">スレッドを作成</button>
         </div>
       <% end %>
