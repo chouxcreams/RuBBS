@@ -1,23 +1,21 @@
 <div class="container">
   <div class="row">
-    <h2 class="col-md-8 col-xs-12 offset-md-2"><%= @board.title %></h2>
+    <h2 class="col-md-8 col-xs-12 offset-md-2"><%= @comment.name %>のコメント</h2>
   </div>
   <div class="row mt-2">
     <div class="col-md-6 col-xs-12 offset-md-3">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title"><%= @comment.id %>. <%=@comment.name %></h5>
+          <h5 class="card-title"><%=@comment.name %></h5>
           <p class="card-text"><%= simple_format(@comment.body)  %></p>
           <%= form_tag(comment_show_path(@comment.id), method: :get, class: "form-inline mr-2", style: "display: inline") do %>
             <div class="form-group" style="display: inline">
               <button type="submit" class="text-secondary btn-boarder"><i class="fas fa-reply"></i></button>
-              <input type="hidden" name="board_id" value="<%= @board.id %>">
             </div>
           <% end %>
           <%= form_tag(comment_destroy_path(@comment.id), method: :delete, class: "form-inline", style: "display: inline") do %>
             <div class="form-group" style="display: inline">
               <button type="submit" class="text-danger btn-border"><i class="fas fa-trash-alt"></i></button>
-              <input type="hidden" name="board_id" value="<%= @board.id %>">
             </div>
           <% end %>
         </div>
@@ -25,7 +23,32 @@
     </div>
   </div>
   <div class="row mt-5">
-    <h4 class="col-md-8 col-xs-12 offset-md-3"><%= @comment.id %>に返信する</h4>
+    <h4 class="col-md-8 col-xs-12 offset-md-3"><%= @comment.name %>への返信</h4>
+  </div>
+  <% @replies.each do |reply| %>
+    <div class="row mt-2">
+      <div class="col-md-6 col-xs-12 offset-md-3">
+        <div class="card bg-secondary">
+          <div class="card-body">
+            <h5 class="card-title text-light"><%=reply.name %></h5>
+            <p class="card-text text-light"><%= simple_format(reply.body)  %></p>
+            <%= form_tag(comment_show_path(reply.id), method: :get, class: "form-inline mr-2", style: "display: inline") do %>
+              <div class="form-group" style="display: inline">
+                <button type="submit" class="text-light btn-boarder" style="display: inline-block"><i class="fas fa-reply"></i></button>
+              </div>
+            <% end %>
+            <%= form_tag(comment_destroy_path(reply.id), method: :delete, class: "form-inline", style: "display: inline") do %>
+              <div class="form-group" style="display: inline">
+                <button type="submit" class="text-danger btn-border" style="display: inline-block"><i class="fas fa-trash-alt"></i></button>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  <div class="row mt-5">
+    <h4 class="col-md-8 col-xs-12 offset-md-3"><%= @comment.name %>に返信する</h4>
   </div>
   <div class="row">
     <div class="col-md-6 col-xs-12 offset-md-3">
@@ -37,6 +60,11 @@
           <input type="hidden" name="board_id" value="<%= @board.id %>">
         </div>
       <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-xs-12 offset-md-3 mt-1 mb-5">
+      <a href=<%= show_path(@comment.board_id) %>>スレッドホームに戻る</a>
     </div>
   </div>
 </div>

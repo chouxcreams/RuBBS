@@ -2,6 +2,7 @@ class CommentController < ApplicationController
   def show
     @comment = Comment.find(params[:id])
     @board = Board.find(@comment.board_id)
+    @replies = Comment.where(reply_to: params[:id])
   end
   def reply
     if params[:name] == ""
@@ -17,8 +18,8 @@ class CommentController < ApplicationController
   end
   def destroy
     comment = Comment.find(params[:id])
+    Board.decrement_counter(:comments_count, comment.board_id, touch:true)
     comment.destroy()
-    Board.decrement_counter(:comments_count, params[:board_id], touch:true)
     redirect_to show_path(params[:board_id])
   end
 end

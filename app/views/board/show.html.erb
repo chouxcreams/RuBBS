@@ -17,13 +17,11 @@
             <%= form_tag(comment_show_path(comment.id), method: :get, class: "form-inline mr-2", style: "display: inline") do %>
               <div class="form-group" style="display: inline">
                 <button type="submit" class="text-secondary btn-boarder" style="display: inline-block"><i class="fas fa-reply"></i></button>
-                <input type="hidden" name="board_id" value="<%= @board.id %>">
               </div>
             <% end %>
             <%= form_tag(comment_destroy_path(comment.id), method: :delete, class: "form-inline", style: "display: inline") do %>
               <div class="form-group" style="display: inline">
                 <button type="submit" class="text-danger btn-border" style="display: inline-block"><i class="fas fa-trash-alt"></i></button>
-                <input type="hidden" name="board_id" value="<%= @board.id %>">
               </div>
             <% end %>
           </div>
@@ -44,6 +42,11 @@
           <input type="hidden" name="board_id" value="<%= @board.id %>">
         </div>
       <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-xs-12 offset-md-3 mt-1 mb-5">
+      <a href=<%= show_path(@comment.board_id) %>>スレッド一覧に戻る</a>
     </div>
   </div>
 </div>
