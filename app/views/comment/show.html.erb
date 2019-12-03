@@ -52,13 +52,18 @@
   <div class="row mt-5">
     <h4 class="col-md-8 col-xs-12 offset-md-3"><%= @comment.name %>に返信する</h4>
   </div>
+  <div id="my-alert" class="row mb-4 mt-3" style="display: none">
+    <div class=" col-md-8 col-xs-12 offset-md-3">
+      <span class="alert alert-danger">本文を入力して下さい</span>
+    </div>
+  </div>
   <div class="row">
     <div class="col-md-6 col-xs-12 offset-md-3">
-      <%= form_tag(comment_reply_path, method: :put) do %>
+      <%= form_tag(comment_reply_path, method: :put, name: "myform") do %>
         <div class="form-group">
           <input type="text" class="form-control mb-1" name="name" placeholder="名前">
-          <textarea name="body" class="form-control" placeholder="投稿内容"></textarea>
-          <button type="submit" class="btn btn-primary mt-2">返信</button>
+          <textarea id="body" name="body" class="form-control" placeholder="投稿内容"></textarea>
+          <button id="my-button" class="btn btn-primary mt-2">返信</button>
           <input type="hidden" name="board_id" value="<%= @board.id %>">
         </div>
       <% end %>
@@ -70,3 +75,18 @@
     </div>
   </div>
 </div>
+<script>
+    var button = document.getElementById("my-button");
+
+    button.addEventListener('click', e => {
+        e.preventDefault();
+        const oge = document.getElementById("body").value;
+        if (oge === "" || oge === undefined) {
+            document.getElementById('my-alert').style.display = 'block';
+        }
+        else {
+            button.className += "disabled";
+            document.myform.submit();
+        }
+    });
+</script>

@@ -26,18 +26,39 @@
       <i class="fas fa-trash-alt text-danger"></i>・・・スレッドの削除
     </div>
   </div>
-
   <div class="row mt-5">
     <h4 class="col-md-8 col-xs-12 offset-md-3">スレッドを作成する</h4>
   </div>
+  <div id="my-alert" class="row mb-4 mt-3" style="display: none">
+    <div class=" col-md-8 col-xs-12 offset-md-3">
+      <span class="alert alert-danger">タイトルを入力して下さい</span>
+    </div>
+  </div>
   <div class="row">
     <div class="col-md-6 col-xs-12 offset-md-3">
-      <%= form_tag('/', class: "form-inline") do %>
+      <%= form_tag('/', class: "form-inline", name: "myform", id: "myform") do %>
         <div class="form-group">
-          <input type="text" name="title" class="form-control" placeholder="タイトル">
-          <button type="submit" class="btn btn-outline-primary">スレッドを作成</button>
+          <input type="text" name="title" class="form-control" id="title" placeholder="タイトル">
+          <button class="btn btn-outline-primary" id="my-button">スレッドを作成</button>
         </div>
       <% end %>
     </div>
   </div>
 </div>
+
+<script>
+  var button = document.getElementById("my-button");
+
+  button.addEventListener('click', e => {
+      e.preventDefault();
+      const title = document.myform.title.value;
+      console.log(title);
+      if (title === "" || title ===undefined) {
+        document.getElementById('my-alert').style.display = 'block';
+      }
+      else {
+          button.className += "disabled";
+          document.myform.submit();
+      }
+  });
+</script>
