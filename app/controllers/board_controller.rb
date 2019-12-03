@@ -5,6 +5,10 @@ class BoardController < ApplicationController
   def show
     @board = Board.find(params[:id])
     @comments = Comment.where(board_id: params[:id])
+    @indices_on_board = {}
+    @comments.each_with_index do |comment, index|
+      @indices_on_board[comment.id] = index+1
+    end
   end
   def create
     if params[:title] != ""

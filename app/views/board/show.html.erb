@@ -8,7 +8,12 @@
         <div class="card">
           <div class="card-body">
             <h5 class="card-title"><%= index+1 %>. <%=comment.name %></h5>
-            <p class="card-text"><%= simple_format(comment.body)  %></p>
+            <p class="card-text">
+              <% if comment.reply_to != "0" && comment.reply_to != nil%>
+                >> <%= @indices_on_board[comment.reply_to] %>
+              <% end %>
+              <%= simple_format(comment.body)  %>
+            </p>
             <%= form_tag(comment_show_path(comment.id), method: :get, class: "form-inline mr-2", style: "display: inline") do %>
               <div class="form-group" style="display: inline">
                 <button type="submit" class="text-secondary btn-boarder" style="display: inline-block"><i class="fas fa-reply"></i></button>
